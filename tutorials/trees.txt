@@ -1,0 +1,154 @@
+
+------- Node & Node 2 -------
+
+Node - Associated with the terms tree
+    
+    Key - Holds the hased value of the Node
+    indexes: map that holds all DocID's and relevant information
+        Holds:
+            - DocID
+            - author
+            - organization
+            - relevancy
+    left - pointer to the left node attached, set as null for default
+    right - pointer to the right node attached, set as null for default
+    Parent - Holds the pointer to the node above the node
+    height - int to hold the height value
+
+Node 2 - Writer and Org Tree
+
+     Key - Holds the hased value of the Node
+    indexes: map that holds all DocID's and relevant information
+        Holds:
+            - DocID
+            - key value (hashed writer / organization)
+    left - pointer to the left node attached, set as null for default
+    right - pointer to the right node attached, set as null for default
+    Parent - Holds the pointer to the node above the node
+    height - int to hold the height value
+
+------- Terms Tree -------
+
+public:
+    TermsTree();
+        Constructor
+
+    ~TermsTree();
+        Destructor
+
+
+    bool isEmpty();
+        Checks if a tree is empty
+
+    void insert(std::string author, std::string organization, std::string term, int docID, int relevancy);
+        wrapper function for the private insert function
+        *****this is what you use if you want to insert a new node / new docID and relevancy*****
+
+    std::map<int, std::pair<std::pair<std::string, std::string>,int>> search(std::string term);
+        This searches the tree and returns the map of values associated with the node
+
+    void print();
+        wrapper function for printing the tree
+
+private:
+    Node* root;
+        root node
+
+    std::hash<std::string> hasher;
+        hashing function from the hashing library
+
+    Node* insert(Node* node, std::string author, std::string organization, std::string term, int docID,int relevancy);
+        private node function, handles all rotations and insertions for the tree
+
+    void print(const std::string &prefix, Node *parent, bool isLeft, bool isRoot);
+        prints the tree based on the above function
+
+    Node* rotateLeft(Node* n);
+        rotates a node left
+        *you shouldn't have to ever use this
+
+    Node* rotateRight(Node* n);
+        rotates a node right
+        *you shouldn't have to ever use this
+
+    Node* rotateLeftTwice(Node* n);
+        rotates left twice
+        *you shouldn't have to ever use this
+
+    Node* rotateRightTwice(Node* n);
+        rotates right twice
+        *you shouldn't have to ever use this
+
+    int height(Node* node);
+        returns the height from a certain node
+        *you shouldn't have to ever use this
+
+    int getBalanceFactor(Node* n);
+        calculates the balance factor
+        *you shouldn't have to ever use this
+        *depricated, and will be deleted by next push
+
+    void deleteTree(Node* node);
+        deletes the tree, used in the ~TermsTree function
+
+------ Organization Tree (THIS IS THE SAME AS THE WRITER TREE)-------
+
+   OrganizationTree();
+        Constructor
+
+    ~OrganizationTree();
+        Destructor
+
+    bool isEmpty();
+        Checks if a tree is empty
+
+    void insert(std::string organization, int docID);
+        wrapper function for the private insert function
+        *****this is what you use if you want to insert a new node / new docID*****
+
+    std::map<unsigned long,int> search(std::string term);
+         This searches the tree and returns the map of values associated with the node
+
+    void print();
+        wrapper function for the print statement
+
+    private:
+    Node* root;
+        root node
+
+    std::hash<std::string> hasher;
+        hashing function from the hashing library
+
+    Node* insert(Node* node, std::string author, std::string organization, std::string term, int docID,int relevancy);
+        private node function, handles all rotations and insertions for the tree
+
+    void print(const std::string &prefix, Node *parent, bool isLeft, bool isRoot);
+        prints the tree based on the above function
+
+    Node* rotateLeft(Node* n);
+        rotates a node left
+        *you shouldn't have to ever use this
+
+    Node* rotateRight(Node* n);
+        rotates a node right
+        *you shouldn't have to ever use this
+
+    Node* rotateLeftTwice(Node* n);
+        rotates left twice
+        *you shouldn't have to ever use this
+
+    Node* rotateRightTwice(Node* n);
+        rotates right twice
+        *you shouldn't have to ever use this
+
+    int height(Node* node);
+        returns the height from a certain node
+        *you shouldn't have to ever use this
+
+    int getBalanceFactor(Node* n);
+        calculates the balance factor
+        *you shouldn't have to ever use this
+        *depricated, and will be deleted by next push
+
+    void deleteTree(Node* node);
+        deletes the tree, used in the ~TermsTree function
